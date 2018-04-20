@@ -1,2 +1,2 @@
 # offer
-python: spider, database, flask, pandas
+python: spider, mysql, redis, flask, pandas
