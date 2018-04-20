@@ -2,6 +2,9 @@
 import requests
 from bs4 import BeautifulSoup
 from lxml import html
+from db import *
+
+job_list = [];
 
 def get_page(url):
 	response = requests.get(url)
@@ -21,6 +24,7 @@ def get_jobinfo(url):
 	#print offer_list
 	for v in offer_list:
 		if(v != u''):
+			job_list.append(v[v.find(u'\uff1a') + 1:])
 			print v[v.find(u'\uff1a') + 1:]
 			
 def get_jobdemand(url):
@@ -33,9 +37,17 @@ links = get_links(url)
 #print links
 
 url = "http://jobs.zhaopin.com/120185013250818.htm?ssidkey=y&ss=409&ff=03&sg=d964874b2a0d46f290547ed3a894a789&so=1"
-get_jobinfo(url)
+jobinfo = get_jobinfo(url)
 jobdemand = get_jobdemand(url)
+job_list.append(jobdemand)
 print jobdemand
+
+print len(job_list)
+
+#joboffer = [1,2,3,4,5,6,7,8,9]
+insert_table_job(job_list)
+
+#cursor.execute('insert into user (id, name) values (%s, %s)', ['1', 'Michael'])
 
 
 

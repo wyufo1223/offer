@@ -9,8 +9,8 @@ DB_CONFIG = {
 }
 
 DB_NAME = 'joboffer'
-CREATE_TABLE_JOB = """
-	#USE `JOBOFFER`;
+
+CREATE_TABLE_JOB = """	
     CREATE TABLE IF NOT EXISTS `JOB`(
         `ID` BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
         `MONTHLYSALARY` VARCHAR(100),
@@ -25,29 +25,37 @@ CREATE_TABLE_JOB = """
     )ENGINE=INNODB DEFAULT CHARSET=UTF8;
 """
 
-conn = pymysql.connect(**DB_CONFIG)
-cursor = conn.cursor()
+INSERT_TABLE_JOB = """
+	INSERT INTO `JOB`(`MONTHLYSALARY`, `WORKINGPLACE`, `RELEASEDATE`, `JOBTYPE`, 
+		`WORKEXPERIENCE`, `LOWESTDEGREE`, `RECRUITMENTNUMBER`, `POSITIONCATEGORY`, `DEMAND`)
+	VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+"""
+	    #VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)	 
+def create_database():
+	conn = pymysql.connect(**DB_CONFIG)
+	cursor = conn.cursor()
+	cursor.execute("CREATE DATABASE IF NOT EXISTS {} DEFAULT CHARACTER SET 'utf8'".format(DB_NAME))
 
-def create_database(cursor):
-    try:
-        cursor.execute("CREATE DATABASE IF NOT EXISTS {} DEFAULT CHARACTER SET 'utf8'".format(DB_NAME))
-    except pymysql.Error as err:
-        print("Failed creating database: {}".format(err))
-        exit(1)	
+def get_db_conn():
+	conn = pymysql.connect(database='joboffer', **DB_CONFIG)	
+	return conn
+
+def create_table_job():	
+	get_db_conn().cursor().execute(CREATE_TABLE_JOB)
+	
+def insert_table_job(joboffer):
+	conn = get_db_conn()	
+	conn.cursor().execute(INSERT_TABLE_JOB, joboffer)
+	conn.commit()
 
 
+#create_database()
 
-def create_table_job(cursor):
-    cursor.execute(CREATE_TABLE_JOB)
- 
+#create_table_job()
 
-conn = pymysql.connect(**DB_CONFIG)
-cursor = conn.cursor()
-create_database(cursor)
+#joboffer = [1,2,3,4,5,6,7,8,9]
+#insert_table_job(joboffer)
 
-conn = pymysql.connect(database='joboffer', **DB_CONFIG)
-cursor = conn.cursor()
-create_table_job(cursor)
 
 
 
