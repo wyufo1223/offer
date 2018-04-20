@@ -10,5 +10,5 @@ pip install BeautifulSoup
 pip install lxml
 
 mysql
-pip install mysql-connector-python --allow-external mysql-connector-python
-pip install mysql-connector
+pip install pymysql
+
