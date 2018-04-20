@@ -1,2 +1,14 @@
 # offer
-python: spider, mysql, redis, flask, pandas
+python: 
+spider, mysql, redis, flask, pandas
+
+Python Version: Python 2.7
+
+spider
+pip install requests
+pip install BeautifulSoup
+pip install lxml
+
+mysql
+pip install mysql-connector-python --allow-external mysql-connector-python
+pip install mysql-connector
