@@ -15,3 +15,5 @@ pip install lxml
 ***2. Mysql***  
 pip install pymysql
 
+***3. Flask***  
+pip install flask
