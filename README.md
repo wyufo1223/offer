@@ -1,14 +1,15 @@
 # joboffer
-Python techniques: 
+## Python techniques  
 spider, mysql, redis, flask, pandas
 
-Python Version: Python 2.7
+## Python Version  
+Python 2.7
 
-Spider
+## Spider  
 pip install requests
 pip install BeautifulSoup
 pip install lxml
 
-Mysql
+## Mysql  
 pip install pymysql
 
